@@ -1,0 +1,30 @@
+ # month names
+font:
+  url: https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico
+  header: Pacifico
+  dayNumber: Pacifico
+  dayName: Amatic SC
+  monthName: Amatic SC
+ 
+months:
+  - Januar
+  - Februar
+  - März
+  - April
+  - Mai
+  - Juni
+  - Juli
+  - August
+  - September
+  - Oktober
+  - November
+  - Dezember
+ 
+days:
+  - So
+  - Mo
+  - Di
+  - Mi
+  - Do
+  - Fr
+  - Sa
