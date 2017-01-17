@@ -51,8 +51,8 @@ function getCalendarDataForYear(year) {
 // dimensions
 var headerHeight = 250 + config.typography.header.size,
 	monthWidth = 300,
-	dayHeight = 10 + config.typography.dayNumber.size + config.typography.dayName.size,
-	monthHeight = dayHeight * 31,
+	dayHeight = 15 + config.typography.dayNumber.size + config.typography.dayName.size,
+	monthHeight = dayHeight * 31, // TODO: 32 would be correct? wtf?
 	monthTopPadding = 100 + config.typography.monthName.size,
 	monthRowItemCount = 6,
 	spacers = 30,
@@ -102,6 +102,14 @@ months.append("text")
 		.attr("font-size", config.typography.monthName.size + "px")
 		.attr("fill", config.typography.monthName.color)
 		.attr("alignment-baseline", "central");
+
+months.append("line")
+		.style("stroke", "#DDD")
+		.style("stroke-width", 3)
+		.attr("x1", monthWidth - 10)
+		.attr("y1", dayHeight)
+		.attr("x2", monthWidth - 10)
+		.attr("y2", monthHeight + dayHeight);
 
 var day = months.selectAll("g.day")
 				.data(function (d) { return d.days; })
