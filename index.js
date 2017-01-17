@@ -26,6 +26,7 @@ function monthInformation(year, month) {
 
 		days.push({
 			name: config.days[date.getDay()],
+			dow: date.getDay(),
 			number: day
 		});
 	}
@@ -44,17 +45,15 @@ function getCalendarDataForYear(year) {
 		data.push(monthInformation(year, month));
 	}
 	
-	console.log(data);
-	
 	return data;
 }
 
 // dimensions
-var headerHeight = 250,
+var headerHeight = 250 + config.typography.header.size,
 	monthWidth = 300,
-	dayHeight = 45,
+	dayHeight = 10 + config.typography.dayNumber.size + config.typography.dayName.size,
 	monthHeight = dayHeight * 31,
-	monthTopPadding = 75,
+	monthTopPadding = 100 + config.typography.monthName.size,
 	monthRowItemCount = 6,
 	spacers = 30,
 	width = monthWidth * monthRowItemCount + (spacers * 2),
@@ -70,15 +69,16 @@ var svg = d3.select(d3n.document.body).append("svg")
 
 var defs = svg.append("defs").append("style")
 			.attr("type", "text/css")
-			.text("@import url('" + config.font.url + "')");
+			.text("@import url('" + config.typography.url + "')");
 
 var requestedYear = getCalendarDataForYear(argv.year);
 
 var header = svg.append("g")
 				.append("text")
 				.text(argv.year)
-				.attr("font-family", config.font.header)
-				.attr("font-size", "80px")
+				.attr("font-family", config.typography.header.font)
+				.attr("font-size", config.typography.header.size + "px")
+				.attr("fill", config.typography.header.color)
 				.attr("x", width / 2)
 				.attr("y", headerHeight / 3)
 				.attr("text-anchor", "middle")
@@ -98,22 +98,30 @@ var months = svg.selectAll("g.month")
 
 months.append("text")
 		.text(function(d) {return d.month; })
-		.attr("font-family", config.font.monthName)
-		.attr("font-size", "40px")
+		.attr("font-family", config.typography.monthName.font)
+		.attr("font-size", config.typography.monthName.size + "px")
+		.attr("fill", config.typography.monthName.color)
 		.attr("alignment-baseline", "central");
 
 var day = months.selectAll("g.day")
 				.data(function (d) { return d.days; })
 				.enter()
 				.append("g")
+				.attr("class", function (d) {
+					if(d.dow === 0 || d.dow === 6) {
+						return "weekend day";
+					}
+					return "day";
+				})
 				.attr("transform", function(d, i) {
 					return translate(0, ((i+1) * dayHeight));
 				});
 
 day.append("text")
 	.text(function (d) { return d.number; })
-	.style("font-size", "20px")
-	.style("font-family", config.font.dayNumber)
+	.style("font-size", config.typography.dayNumber.size + "px")
+	.style("font-family", config.typography.dayNumber.font)
+	.attr("fill", config.typography.dayNumber.color)
 	.style("font-weight", "bold")
 	.attr("x", 0)
 	.attr("y", 0)
@@ -121,12 +129,12 @@ day.append("text")
 
 day.append("text")
 	.text(function (d) { return d.name; })
-	.style("font-size", "14px")
-	.style("font-family", config.font.dayName)
-	.attr("fill", "#888")
+	.style("font-size", config.typography.dayName.size + "px")
+	.style("font-family", config.typography.dayName.font)
+	.attr("fill", config.typography.dayName.color)
 	.attr("x", 2)
 	.attr("y", 25)
-	.attr("dy", 14);
+	.attr("dy", config.typography.dayName.size);
   
 day.append("line")
 	.style("stroke", "#EEE")

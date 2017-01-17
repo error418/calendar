@@ -1,10 +1,22 @@
  # month names
-font:
+typography:
   url: https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico
-  header: Pacifico
-  dayNumber: Pacifico
-  dayName: Amatic SC
-  monthName: Amatic SC
+  header:
+    font: Pacifico
+    size: 80
+    color: "#000"
+  dayNumber: 
+    font: Pacifico
+    size: 20
+    color: "#888"
+  dayName:
+    font: Amatic SC
+    size: 15
+    color: "#AAA"
+  monthName:
+    font: Amatic SC
+    size: 40
+    color: "#000"
  
 months:
   - Januar
