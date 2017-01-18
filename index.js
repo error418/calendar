@@ -49,10 +49,11 @@ function getCalendarDataForYear(year) {
 }
 
 // dimensions
-var headerHeight = 250 + config.typography.header.size,
+var headerHeight = 150 + config.typography.header.size,
 	monthWidth = 300,
+	monthPadding = 10,
 	dayHeight = 15 + config.typography.dayNumber.size + config.typography.dayName.size,
-	monthHeight = dayHeight * 31, // TODO: 32 would be correct? wtf?
+	monthHeight = dayHeight * 31,
 	monthTopPadding = 100 + config.typography.monthName.size,
 	monthRowItemCount = 6,
 	spacers = 30,
@@ -93,7 +94,7 @@ var months = svg.selectAll("g.month")
     	var row = Math.floor(i / monthRowItemCount);
     	var col = i % monthRowItemCount;
     	
-    	return translate(spacers + (col * monthWidth), (row * (monthHeight + monthTopPadding)) + headerHeight);
+    	return translate(spacers + (col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
     });
 
 months.append("text")
@@ -101,15 +102,10 @@ months.append("text")
 		.attr("font-family", config.typography.monthName.font)
 		.attr("font-size", config.typography.monthName.size + "px")
 		.attr("fill", config.typography.monthName.color)
-		.attr("alignment-baseline", "central");
+		.attr("text-anchor", "middle")
+		.attr("alignment-baseline", "central")
+		.attr("x", (monthWidth / 2) - monthPadding);
 
-months.append("line")
-		.style("stroke", "#DDD")
-		.style("stroke-width", 3)
-		.attr("x1", monthWidth - 10)
-		.attr("y1", dayHeight)
-		.attr("x2", monthWidth - 10)
-		.attr("y2", monthHeight + dayHeight);
 
 var day = months.selectAll("g.day")
 				.data(function (d) { return d.days; })
@@ -125,13 +121,23 @@ var day = months.selectAll("g.day")
 					return translate(0, ((i+1) * dayHeight));
 				});
 
+day.append("rect")
+	.attr("width", monthWidth)
+	.attr("height", dayHeight)
+	.style("fill", function (d) {
+		if(d.dow === 0 || d.dow === 6) {
+			return "#ffffc4";
+		} 
+		return "#FFF";
+	});
+
 day.append("text")
 	.text(function (d) { return d.number; })
 	.style("font-size", config.typography.dayNumber.size + "px")
 	.style("font-family", config.typography.dayNumber.font)
 	.attr("fill", config.typography.dayNumber.color)
 	.style("font-weight", "bold")
-	.attr("x", 0)
+	.attr("x", 8)
 	.attr("y", 0)
 	.attr("dy", 20);
 
@@ -140,16 +146,26 @@ day.append("text")
 	.style("font-size", config.typography.dayName.size + "px")
 	.style("font-family", config.typography.dayName.font)
 	.attr("fill", config.typography.dayName.color)
-	.attr("x", 2)
+	.attr("x", 10)
 	.attr("y", 25)
 	.attr("dy", config.typography.dayName.size);
   
 day.append("line")
-	.style("stroke", "#EEE")
+	.style("stroke", config.lines.dayDivider.color)
+	.style("stroke-width", config.lines.dayDivider.width + "px")
 	.attr("x1", 0)
-	.attr("y1", dayHeight - 5) 
-	.attr("x2", monthWidth - 10)
-	.attr("y2", dayHeight - 5);
+	.attr("y1", dayHeight) 
+	.attr("x2", monthWidth)
+	.attr("y2", dayHeight);
+
+// month divider line
+months.append("line")
+	.style("stroke", config.lines.monthDivider.color)
+	.style("stroke-width", config.lines.monthDivider.width + "px")
+	.attr("x1", monthWidth)
+	.attr("y1", dayHeight)
+	.attr("x2", monthWidth)
+	.attr("y2", monthHeight + dayHeight);
 
 // get a reference to our SVG object and add the SVG NS
 var svgGraph = svg;

@@ -2,8 +2,8 @@
 typography:
   url: https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico
   header:
-    font: Pacifico
-    size: 80
+    font: Amatic SC
+    size: 140
     color: "#000"
   dayNumber: 
     font: Pacifico
@@ -17,6 +17,14 @@ typography:
     font: Amatic SC
     size: 40
     color: "#000"
+
+lines:
+  monthDivider:
+    color: "#AA0"
+    width: 5
+  dayDivider:
+    color: "#d1d100"
+    width: 1
  
 months:
   - Januar
