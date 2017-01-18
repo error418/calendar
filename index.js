@@ -49,16 +49,17 @@ function getCalendarDataForYear(year) {
 }
 
 // dimensions
-var headerHeight = 150 + config.typography.header.size,
-	monthWidth = 300,
-	monthPadding = 10,
+var aspectRatio = 1.414,
+	headerHeight = 150 + config.typography.header.size,
+	monthRowItemCount = 6,
+	pageSpacers = 30,
 	dayHeight = 15 + config.typography.dayNumber.size + config.typography.dayName.size,
 	monthHeight = dayHeight * 31,
 	monthTopPadding = 100 + config.typography.monthName.size,
-	monthRowItemCount = 6,
-	pageSpacers = 30,
-	width = monthWidth * monthRowItemCount + (pageSpacers * 2),
-    height = (pageSpacers * 2) + headerHeight + ((monthHeight + monthTopPadding) * (12 / monthRowItemCount));
+	height = (pageSpacers * 2) + headerHeight + ((monthHeight + monthTopPadding) * (12 / monthRowItemCount)),
+	monthWidth = (height / aspectRatio) / monthRowItemCount,
+	monthPadding = 10,
+	width = monthWidth * monthRowItemCount + (pageSpacers * 2);
 
 
 
