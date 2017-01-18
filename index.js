@@ -20,7 +20,7 @@ function monthInformation(year, month) {
 	var days = [];
 	for (var day = 1; day <= dayCount; day++) {
 		var date = new Date(year, month, day);
-
+	
 		days.push({
 			name: config.days[date.getDay()],
 			dow: date.getDay(),
@@ -90,39 +90,39 @@ svg.append("g")
 
 // add months
 var months = svg.selectAll("g.month")
-    .data(requestedYear)
-    .enter()
-    .append("g")
-    .attr("transform", function (d, i) {
-	var row = Math.floor(i / monthRowItemCount);
-	var col = i % monthRowItemCount;
+	.data(requestedYear)
+	.enter()
+	.append("g")
+	.attr("transform", function (d, i) {
+		var row = Math.floor(i / monthRowItemCount);
+		var col = i % monthRowItemCount;
 		
-	return translate((col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
-});
+		return translate((col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
+	});
 
 months.append("text")
-		.text(function(d) {return d.month; })
-		.attr("font-family", config.typography.monthName.font)
-		.attr("font-size", config.typography.monthName.size + "px")
-		.attr("fill", config.typography.monthName.color)
-		.attr("text-anchor", "middle")
-		.attr("alignment-baseline", "central")
-		.attr("x", (monthWidth / 2) - monthPadding);
+	.text(function(d) {return d.month; })
+	.attr("font-family", config.typography.monthName.font)
+	.attr("font-size", config.typography.monthName.size + "px")
+	.attr("fill", config.typography.monthName.color)
+	.attr("text-anchor", "middle")
+	.attr("alignment-baseline", "central")
+	.attr("x", (monthWidth / 2) - monthPadding);
 
 
 var day = months.selectAll("g.day")
-				.data(function (d) { return d.days; })
-				.enter()
-				.append("g")
-				.attr("class", function (d) {
-					if(d.dow === 0 || d.dow === 6) {
-						return "weekend day";
-					}
-					return "day";
-				})
-				.attr("transform", function(d, i) {
-					return translate(0, ((i+1) * dayHeight));
-				});
+	.data(function (d) { return d.days; })
+	.enter()
+	.append("g")
+	.attr("class", function (d) {
+		if(d.dow === 0 || d.dow === 6) {
+			return "weekend day";
+		}
+		return "day";
+	})
+	.attr("transform", function(d, i) {
+		return translate(0, ((i+1) * dayHeight));
+	});
 
 day.append("rect")
 	.attr("width", monthWidth)
@@ -173,9 +173,9 @@ months.append("line")
 var svgXML = d3n.svgString();
 
 fs.writeFileSync(
-		"graph.svg",
-		"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" + svgXML,
-		{ encoding: "utf8" }
+	"graph.svg",
+	"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" + svgXML,
+	{ encoding: "utf8" }
 );
   
 
