@@ -1,0 +1,50 @@
+ # month names
+typography:
+  url: https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico
+  header:
+    font: Amatic SC
+    size: 140
+    color: "#000"
+  dayNumber: 
+    font: Pacifico
+    size: 20
+    color: "#888"
+  dayName:
+    font: Amatic SC
+    size: 15
+    color: "#AAA"
+  monthName:
+    font: Amatic SC
+    size: 40
+    color: "#000"
+
+lines:
+  monthDivider:
+    color: "#AA0"
+    width: 5
+  dayDivider:
+    color: "#d1d100"
+    width: 1
+ 
+months:
+  - Januar
+  - Februar
+  - März
+  - April
+  - Mai
+  - Juni
+  - Juli
+  - August
+  - September
+  - Oktober
+  - November
+  - Dezember
+ 
+days:
+  - So
+  - Mo
+  - Di
+  - Mi
+  - Do
+  - Fr
+  - Sa
