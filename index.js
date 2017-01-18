@@ -56,17 +56,19 @@ var headerHeight = 150 + config.typography.header.size,
 	monthHeight = dayHeight * 31,
 	monthTopPadding = 100 + config.typography.monthName.size,
 	monthRowItemCount = 6,
-	spacers = 30,
-	width = monthWidth * monthRowItemCount + (spacers * 2),
-    height = headerHeight + ((monthHeight + monthTopPadding) * (12 / monthRowItemCount));
+	pageSpacers = 30,
+	width = monthWidth * monthRowItemCount + (pageSpacers * 2),
+    height = (pageSpacers * 2) + headerHeight + ((monthHeight + monthTopPadding) * (12 / monthRowItemCount));
 
 
 
 // create svg
 var svg = d3.select(d3n.document.body).append("svg")
-    .attr("width", width)
+    .attr("width", width + (2 * pageSpacers))
     .attr("height", height)
-    .attr('xmlns', 'http://www.w3.org/2000/svg');
+    .attr('xmlns', 'http://www.w3.org/2000/svg')
+    .append("g")
+    .attr("transform", translate(pageSpacers, pageSpacers));
 
 var defs = svg.append("defs").append("style")
 			.attr("type", "text/css")
@@ -81,7 +83,7 @@ var header = svg.append("g")
 				.attr("font-size", config.typography.header.size + "px")
 				.attr("fill", config.typography.header.color)
 				.attr("x", width / 2)
-				.attr("y", headerHeight / 3)
+				.attr("y", 100)
 				.attr("text-anchor", "middle")
 				.attr("alignment-baseline", "central");
 
@@ -94,7 +96,7 @@ var months = svg.selectAll("g.month")
     	var row = Math.floor(i / monthRowItemCount);
     	var col = i % monthRowItemCount;
     	
-    	return translate(spacers + (col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
+    	return translate((col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
     });
 
 months.append("text")
