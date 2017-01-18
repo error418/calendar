@@ -14,5 +14,8 @@
     "datejs": "^1.0.0-rc3",
     "minimist": "^1.2.0",
     "yamljs": "^0.2.8"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1"
   }
 }

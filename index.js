@@ -3,15 +3,12 @@ require("datejs");
 var d3 = require("d3");
 var fs = require("fs");
 var yaml = require("yamljs");
-var argv = require('minimist')(process.argv.slice(2));
-var D3Node = require('d3-node');
+var argv = require("minimist")(process.argv.slice(2));
+var D3Node = require("d3-node");
 
-var config = yaml.load('config.yml');
+var config = yaml.load("config.yml");
 var d3n = new D3Node();
 
-var data = {
-	months: config.months
-};
 
 function translate(x, y) {
 	return "translate(" + x + "," + y + ")";
@@ -65,28 +62,31 @@ var aspectRatio = 1.414,
 
 // create svg
 var svg = d3.select(d3n.document.body).append("svg")
-    .attr("width", width + (2 * pageSpacers))
-    .attr("height", height)
-    .attr('xmlns', 'http://www.w3.org/2000/svg')
-    .append("g")
-    .attr("transform", translate(pageSpacers, pageSpacers));
+	.attr("width", width + (2 * pageSpacers))
+	.attr("height", height)
+	.attr("xmlns", "http://www.w3.org/2000/svg")
+	.append("g")
+	.attr("transform", translate(pageSpacers, pageSpacers));
 
-var defs = svg.append("defs").append("style")
-			.attr("type", "text/css")
-			.text("@import url('" + config.typography.url + "')");
+// add defs
+svg.append("defs")
+	.append("style")
+	.attr("type", "text/css")
+	.text("@import url('" + config.typography.url + "')");
 
 var requestedYear = getCalendarDataForYear(argv.year);
 
-var header = svg.append("g")
-				.append("text")
-				.text(argv.year)
-				.attr("font-family", config.typography.header.font)
-				.attr("font-size", config.typography.header.size + "px")
-				.attr("fill", config.typography.header.color)
-				.attr("x", width / 2)
-				.attr("y", 100)
-				.attr("text-anchor", "middle")
-				.attr("alignment-baseline", "central");
+// add header
+svg.append("g")
+	.append("text")
+	.text(argv.year)
+	.attr("font-family", config.typography.header.font)
+	.attr("font-size", config.typography.header.size + "px")
+	.attr("fill", config.typography.header.color)
+	.attr("x", width / 2)
+	.attr("y", 100)
+	.attr("text-anchor", "middle")
+	.attr("alignment-baseline", "central");
 
 // add months
 var months = svg.selectAll("g.month")
@@ -94,11 +94,11 @@ var months = svg.selectAll("g.month")
     .enter()
     .append("g")
     .attr("transform", function (d, i) {
-    	var row = Math.floor(i / monthRowItemCount);
-    	var col = i % monthRowItemCount;
-    	
-    	return translate((col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
-    });
+	var row = Math.floor(i / monthRowItemCount);
+	var col = i % monthRowItemCount;
+		
+	return translate((col * (monthWidth + monthPadding)), (row * (monthHeight + monthTopPadding)) + headerHeight);
+});
 
 months.append("text")
 		.text(function(d) {return d.month; })
@@ -170,15 +170,12 @@ months.append("line")
 	.attr("x2", monthWidth)
 	.attr("y2", monthHeight + dayHeight);
 
-// get a reference to our SVG object and add the SVG NS
-var svgGraph = svg;
-
 var svgXML = d3n.svgString();
 
 fs.writeFileSync(
-		'graph.svg',
-		'<?xml version="1.0" encoding="UTF-8" ?>\n' + svgXML,
-		{ encoding: 'utf8' }
+		"graph.svg",
+		"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" + svgXML,
+		{ encoding: "utf8" }
 );
   
 
