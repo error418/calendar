@@ -18,6 +18,9 @@
   "bin": {
   	"svgcal": "bin/cmd.js"
   },
+  "bugs": {
+  	"url": "https://github.com/error418/calendar/issues"
+  },
   "devDependencies": {
     "eslint": "^3.13.1"
   }
