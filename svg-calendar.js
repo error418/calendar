@@ -3,11 +3,10 @@ require("datejs");
 var d3 = require("d3");
 var fs = require("fs");
 var yaml = require("yamljs");
-var argv = require("minimist")(process.argv.slice(2));
 var D3Node = require("d3-node");
 
 
-function SvgCalendar(config) {
+function SvgCalendar(year, config) {
 	config = config || yaml.load("config.yml");
 
 	// dimensions
@@ -41,12 +40,12 @@ function SvgCalendar(config) {
 			.attr("type", "text/css")
 			.text("@import url('" + config.typography.url + "')");
 		
-		var requestedYear = getCalendarDataForYear(argv.year);
+		var requestedYear = getCalendarDataForYear(year);
 		
 		// add header
 		svg.append("g")
 			.append("text")
-			.text(argv.year)
+			.text(year)
 			.attr("font-family", config.typography.header.font)
 			.attr("font-size", config.typography.header.size + "px")
 			.attr("fill", config.typography.header.color)
@@ -119,7 +118,7 @@ function SvgCalendar(config) {
 			.attr("x", 10)
 			.attr("y", 25)
 			.attr("dy", config.typography.dayName.size);
-		  
+
 		day.append("line")
 			.style("stroke", config.lines.dayDivider.color)
 			.style("stroke-width", config.lines.dayDivider.width + "px")
@@ -146,7 +145,7 @@ function SvgCalendar(config) {
 		filename = filename || "graph.svg";
 		
 		fs.writeFileSync(
-				"graph.svg",
+				filename,
 				"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" + svgXML.svgString(),
 				{ encoding: "utf8" }
 		);
