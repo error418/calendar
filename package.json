@@ -2,7 +2,7 @@
   "name": "calendar",
   "version": "1.0.0",
   "description": "generates a svg calendar",
-  "main": "index.js",
+  "main": "svg-calendar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,12 @@
     "datejs": "^1.0.0-rc3",
     "minimist": "^1.2.0",
     "yamljs": "^0.2.8"
+  },
+  "bin": {
+  	"svgcal": "bin/cmd.js"
+  },
+  "bugs": {
+  	"url": "https://github.com/error418/calendar/issues"
   },
   "devDependencies": {
     "eslint": "^3.13.1"
