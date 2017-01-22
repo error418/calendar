@@ -1,31 +1,45 @@
- # month names
+# font settings
 typography:
+  # external font source
   url: https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico
+  
+  # header styling
   header:
     font: Amatic SC
     size: 140
     color: "#000"
+    
+  # day number styling
   dayNumber: 
     font: Pacifico
     size: 20
     color: "#888"
+    
+  # day name styling
   dayName:
     font: Amatic SC
     size: 15
     color: "#AAA"
+    
+  # month name styling
   monthName:
     font: Amatic SC
     size: 60
     color: "#000"
 
+# line stylings
 lines:
+  # month divider styling
   monthDivider:
     color: "#AA0"
     width: 5
+    
+  # day stylings
   dayDivider:
     color: "#d1d100"
     width: 1
- 
+
+# month names starting from January
 months:
   - Januar
   - Februar
@@ -40,6 +54,7 @@ months:
   - November
   - Dezember
  
+# day names starting from Sunday
 days:
   - So
   - Mo
