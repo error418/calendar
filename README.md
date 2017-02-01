@@ -6,7 +6,7 @@ Generates a Calendar (as SVG) for a given year.
 * Marks weekends
 * Prints day names
 
-You can print your SVGs as large as you want without fearing quality loss. I've printed my calendar on a sheet of DIN A2 paper.
+You can print your SVGs as large as you want without fearing quality loss. I've printed mine on a sheet of DIN A2 paper.
 
 ## Usage
 
