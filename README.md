@@ -22,6 +22,6 @@ a SVG file is generated to your current directory.
 
 You can customize your calendar appearance in the `config.yml`
 
-## How does it look?
+## How does it look like?
 
 Click [here](examples/export-small.png) for an PNG export based on the generated SVG. I've added some extra graphics (the garland) in this example :)
