@@ -22,6 +22,6 @@
   	"url": "https://github.com/error418/calendar/issues"
   },
   "devDependencies": {
-    "eslint": "^3.13.1"
+    "eslint": "^7.3.1"
   }
 }
